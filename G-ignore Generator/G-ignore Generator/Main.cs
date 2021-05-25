@@ -16,5 +16,17 @@ namespace G_ignore_Generator
         {
             InitializeComponent();
         }
+
+        private void btnOptions_Click(object sender, EventArgs e)
+        {
+            Options optform = new Options();
+            optform.ShowDialog();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            this.lblTitleA.Focus();
+            this.ActiveControl = lblTitleA;
+        }
     }
 }
