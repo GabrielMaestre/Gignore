@@ -34,10 +34,10 @@ namespace G_ignore_Generator
             this.lblTitleA = new System.Windows.Forms.Label();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.btnGenerate = new System.Windows.Forms.Button();
-            this.txtSelect = new System.Windows.Forms.TextBox();
             this.btnOptions = new System.Windows.Forms.Button();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.tipMenu = new System.Windows.Forms.ToolTip(this.components);
+            this.chkListItems = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,13 +53,17 @@ namespace G_ignore_Generator
             // txtPath
             // 
             this.txtPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(252)))));
+            this.txtPath.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPath.Location = new System.Drawing.Point(25, 113);
             this.txtPath.MaxLength = 1000;
             this.txtPath.Name = "txtPath";
+            this.txtPath.ReadOnly = true;
             this.txtPath.Size = new System.Drawing.Size(334, 27);
             this.txtPath.TabIndex = 2;
             this.txtPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tipMenu.SetToolTip(this.txtPath, "Double Click: Open Path Dialog\r\nYou can Paste your Path*");
+            this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
+            this.txtPath.DoubleClick += new System.EventHandler(this.txtPath_DoubleClick);
             // 
             // btnGenerate
             // 
@@ -70,18 +74,6 @@ namespace G_ignore_Generator
             this.btnGenerate.TabIndex = 4;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
-            // 
-            // txtSelect
-            // 
-            this.txtSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(252)))));
-            this.txtSelect.Location = new System.Drawing.Point(25, 157);
-            this.txtSelect.MaxLength = 10000;
-            this.txtSelect.Multiline = true;
-            this.txtSelect.Name = "txtSelect";
-            this.txtSelect.ReadOnly = true;
-            this.txtSelect.Size = new System.Drawing.Size(334, 133);
-            this.txtSelect.TabIndex = 3;
-            this.tipMenu.SetToolTip(this.txtSelect, "Double Click: Open Path Dialog");
             // 
             // btnOptions
             // 
@@ -109,15 +101,28 @@ namespace G_ignore_Generator
             this.tipMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.tipMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(102)))), ((int)(((byte)(214)))));
             // 
+            // chkListItems
+            // 
+            this.chkListItems.Enabled = false;
+            this.chkListItems.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
+            this.chkListItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
+            this.chkListItems.FormattingEnabled = true;
+            this.chkListItems.Location = new System.Drawing.Point(25, 152);
+            this.chkListItems.Name = "chkListItems";
+            this.chkListItems.Size = new System.Drawing.Size(334, 136);
+            this.chkListItems.TabIndex = 7;
+            this.tipMenu.SetToolTip(this.chkListItems, "Double Click: Open Path Dialog");
+            this.chkListItems.DoubleClick += new System.EventHandler(this.chkListItems_DoubleClick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(41)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(384, 361);
+            this.Controls.Add(this.chkListItems);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.btnOptions);
-            this.Controls.Add(this.txtSelect);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.txtPath);
             this.Controls.Add(this.lblTitleA);
@@ -141,10 +146,10 @@ namespace G_ignore_Generator
         private System.Windows.Forms.Label lblTitleA;
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Button btnGenerate;
-        private System.Windows.Forms.TextBox txtSelect;
         private System.Windows.Forms.Button btnOptions;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.ToolTip tipMenu;
+        private System.Windows.Forms.CheckedListBox chkListItems;
     }
 }
 
