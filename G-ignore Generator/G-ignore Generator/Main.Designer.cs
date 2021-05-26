@@ -38,6 +38,9 @@ namespace G_ignore_Generator
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.tipMenu = new System.Windows.Forms.ToolTip(this.components);
             this.chkListItems = new System.Windows.Forms.CheckedListBox();
+            this.browseFiles = new System.Windows.Forms.WebBrowser();
+            this.btnPathSelect = new System.Windows.Forms.Button();
+            this.btnInfo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +57,7 @@ namespace G_ignore_Generator
             // 
             this.txtPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(252)))));
             this.txtPath.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPath.Location = new System.Drawing.Point(25, 113);
+            this.txtPath.Location = new System.Drawing.Point(13, 113);
             this.txtPath.MaxLength = 1000;
             this.txtPath.Name = "txtPath";
             this.txtPath.ReadOnly = true;
@@ -68,7 +71,7 @@ namespace G_ignore_Generator
             // btnGenerate
             // 
             this.btnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerate.Location = new System.Drawing.Point(139, 306);
+            this.btnGenerate.Location = new System.Drawing.Point(266, 307);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(106, 43);
             this.btnGenerate.TabIndex = 4;
@@ -107,12 +110,48 @@ namespace G_ignore_Generator
             this.chkListItems.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
             this.chkListItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
             this.chkListItems.FormattingEnabled = true;
-            this.chkListItems.Location = new System.Drawing.Point(25, 152);
+            this.chkListItems.Location = new System.Drawing.Point(12, 143);
             this.chkListItems.Name = "chkListItems";
-            this.chkListItems.Size = new System.Drawing.Size(334, 136);
+            this.chkListItems.Size = new System.Drawing.Size(360, 158);
             this.chkListItems.TabIndex = 7;
             this.tipMenu.SetToolTip(this.chkListItems, "Double Click: Open Path Dialog");
             this.chkListItems.DoubleClick += new System.EventHandler(this.chkListItems_DoubleClick);
+            this.chkListItems.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.chkListItems_PreviewKeyDown);
+            // 
+            // browseFiles
+            // 
+            this.browseFiles.Location = new System.Drawing.Point(301, 56);
+            this.browseFiles.MinimumSize = new System.Drawing.Size(20, 20);
+            this.browseFiles.Name = "browseFiles";
+            this.browseFiles.Size = new System.Drawing.Size(58, 51);
+            this.browseFiles.TabIndex = 8;
+            this.tipMenu.SetToolTip(this.browseFiles, "Double Click: Open Path Dialog");
+            this.browseFiles.Url = new System.Uri("", System.UriKind.Relative);
+            this.browseFiles.Visible = false;
+            this.browseFiles.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.browseFiles_PreviewKeyDown);
+            // 
+            // btnPathSelect
+            // 
+            this.btnPathSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPathSelect.Location = new System.Drawing.Point(12, 306);
+            this.btnPathSelect.Name = "btnPathSelect";
+            this.btnPathSelect.Size = new System.Drawing.Size(106, 43);
+            this.btnPathSelect.TabIndex = 9;
+            this.btnPathSelect.Text = "Select Path";
+            this.btnPathSelect.UseVisualStyleBackColor = true;
+            this.btnPathSelect.Visible = false;
+            // 
+            // btnInfo
+            // 
+            this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnInfo.Location = new System.Drawing.Point(350, 110);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(30, 30);
+            this.btnInfo.TabIndex = 10;
+            this.btnInfo.Text = "?";
+            this.btnInfo.UseVisualStyleBackColor = true;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
             // 
             // Main
             // 
@@ -120,6 +159,9 @@ namespace G_ignore_Generator
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(41)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(384, 361);
+            this.Controls.Add(this.btnInfo);
+            this.Controls.Add(this.btnPathSelect);
+            this.Controls.Add(this.browseFiles);
             this.Controls.Add(this.chkListItems);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.btnOptions);
@@ -150,6 +192,9 @@ namespace G_ignore_Generator
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.ToolTip tipMenu;
         private System.Windows.Forms.CheckedListBox chkListItems;
+        private System.Windows.Forms.WebBrowser browseFiles;
+        private System.Windows.Forms.Button btnPathSelect;
+        private System.Windows.Forms.Button btnInfo;
     }
 }
 

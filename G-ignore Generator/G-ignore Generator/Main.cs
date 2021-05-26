@@ -2,6 +2,7 @@
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -20,7 +21,8 @@ namespace G_ignore_Generator
             string pathExec = Directory.GetCurrentDirectory();
             string pathStartup = Application.StartupPath;
             string pathStartupFile = Path.Combine(Application.StartupPath, fileGignore2);
-
+            OpenFileDialog opnFile = new OpenFileDialog();
+            FolderBrowserDialog fbdFolder = new FolderBrowserDialog();
 
         private void btnOptions_Click(object sender, EventArgs e)
         {
@@ -37,14 +39,13 @@ namespace G_ignore_Generator
 
         private void txtPath_DoubleClick(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbdPath = new FolderBrowserDialog();
-            fbdPath.RootFolder = Environment.SpecialFolder.UserProfile;
-            fbdPath.Description = "                                        >>>  Select your Repository (Path Folder)    <<<";
+            fbdFolder.RootFolder = Environment.SpecialFolder.UserProfile;
+            fbdFolder.Description = "                                        >>>  Select your Repository (Path Folder)    <<<";
+            fbdFolder.ShowNewFolderButton = true;
 
-
-            if (fbdPath.ShowDialog() == DialogResult.OK)
+            if (fbdFolder.ShowDialog() == DialogResult.OK)
             {
-                string thePath = fbdPath.SelectedPath;
+                string thePath = fbdFolder.SelectedPath;
                 this.txtPath.Text = thePath;
             }
         }
@@ -53,11 +54,13 @@ namespace G_ignore_Generator
         {
             if (String.IsNullOrEmpty(this.txtPath.Text))
             {
-                chkListItems.Enabled = false;//TRUE
+                chkListItems.Enabled = false;//TRUE-NULL
             }
             else
             {
-                chkListItems.Enabled = true;//FALSE
+                chkListItems.Enabled = true;//FALSE-NOT-NULL
+                browseFiles.Url = new Uri(fbdFolder.SelectedPath);
+                chkListItems.BackColor = Color.FromArgb(241, 248, 255);
 
                 if (!File.Exists(pathStartupFile))
                 {
@@ -68,29 +71,56 @@ namespace G_ignore_Generator
 
         private void chkListItems_DoubleClick(object sender, EventArgs e)
         {
-            OpenFileDialog opnPath = new OpenFileDialog();
-            opnPath.InitialDirectory = txtPath.Text;
-            opnPath.Filter = "All files (*.*)|*.*";
-            opnPath.Multiselect = true;
-            opnPath.Title = "       >>>      Select your Files to Import to .GITIGNORE      <<<";
+            opnFile.InitialDirectory = txtPath.Text;
+            opnFile.Filter = "All files (*.*)|*.*";
+            opnFile.Multiselect = true;
+            opnFile.Title = "       >>>      Select your Files to Import to .GITIGNORE      <<<";
 
 
-            if (opnPath.ShowDialog() == DialogResult.OK)
+            if (opnFile.ShowDialog() == DialogResult.OK)
             {
-                string fullPath = opnPath.FileName;
-                string fileSelect = opnPath.SafeFileName;
-                string[] fileSelectMulti = opnPath.SafeFileNames;
+                string fullPath = opnFile.FileName;
+                string fileSelect = opnFile.SafeFileName;
+                string[] fileSelectMulti = opnFile.SafeFileNames;
 
                 string jump = "================================";
 
                 this.chkListItems.Items.Add(jump);
 
-                foreach (String file in opnPath.FileNames)
+                foreach (String file in opnFile.FileNames)
                 {
                     this.chkListItems.Items.Add(file);
+                    
                 }
 
             }
+        }
+
+        private void browseFiles_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyValue.Equals(27))
+            {
+                if(browseFiles.CanGoBack)
+                {
+                    browseFiles.GoBack();
+                }
+            }
+        }
+
+        private void chkListItems_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyValue.Equals(27) || e.KeyCode == Keys.Delete) //DEL OR ESC
+            {
+                foreach (var item in chkListItems.CheckedItems.OfType<string>().ToList())
+                {
+                    chkListItems.Items.Remove(item);
+                }
+            }
+        }
+
+        private void btnInfo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("");
         }
     }
 }

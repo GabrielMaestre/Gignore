@@ -39,6 +39,7 @@ namespace G_ignore_Generator
             this.ClientSize = new System.Drawing.Size(384, 361);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Options";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Options";
             this.ResumeLayout(false);
 
